@@ -11,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.jdbc.Sql;
 
+import javax.transaction.Transactional;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
@@ -114,5 +115,20 @@ class PostRepositoryTest {
 
         assertThat(existingPosts).isNotNull();
         assertThat(existingPosts).hasSize(5);
+
+    }
+
+    @Test
+    @Transactional
+    @Rollback(value = false)
+    void deletePostById(){
+        Post savedPost = postRepository.findById(41).orElse(null);
+        assertThat(savedPost).isNotNull();
+        log.info("Post fetched the database --{}",savedPost);
+
+        postRepository.deleteById(savedPost.getId());
+        Post deletedPost = postRepository.findById(savedPost.getId()).orElse(null);
+
+        assertThat(deletedPost).isNull();
     }
 }

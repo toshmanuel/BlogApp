@@ -37,6 +37,6 @@ public class Post {
     @UpdateTimestamp
     private LocalDate dateModified;
 
-    @OneToMany
+    @OneToMany(/*fetchType = FetchType.EAGER*/)
     private List<Comment> comments;
 }
