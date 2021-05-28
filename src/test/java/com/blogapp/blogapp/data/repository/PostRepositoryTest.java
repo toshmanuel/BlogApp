@@ -131,4 +131,23 @@ class PostRepositoryTest {
 
         assertThat(deletedPost).isNull();
     }
+
+    @Test
+    @Transactional
+    @Rollback(value = false)
+    void updatedSavedPostTest(){
+        Post savedPost = postRepository.findById(41).orElse(null);
+        assertThat(savedPost).isNotNull();
+        assertThat(savedPost.getTitle()).isEqualTo("Title post 1");
+        log.info("Post fetched the database --{}",savedPost);
+
+        savedPost.setTitle("This is a good title");
+        postRepository.save(savedPost);
+
+        Post updatedPost = postRepository.findById(41).orElse(null);
+        assertThat(updatedPost).isNotNull();
+        assertThat(updatedPost.getTitle()).isEqualTo("This is a good title");
+
+        log.info("Post title updated in the database --{}",updatedPost.getTitle());
+    }
 }
