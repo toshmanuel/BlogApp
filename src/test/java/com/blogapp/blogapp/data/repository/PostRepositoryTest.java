@@ -1,6 +1,7 @@
 package com.blogapp.blogapp.data.repository;
 
 import com.blogapp.blogapp.data.models.Author;
+import com.blogapp.blogapp.data.models.Comment;
 import com.blogapp.blogapp.data.models.Post;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,13 +13,14 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.jdbc.Sql;
 
 import javax.transaction.Transactional;
-import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 //import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 //import static org.hamcrest.Matchers.hasSize;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 
@@ -149,5 +151,61 @@ class PostRepositoryTest {
         assertThat(updatedPost.getTitle()).isEqualTo("This is a good title");
 
         log.info("Post title updated in the database --{}",updatedPost.getTitle());
+    }
+
+    @Transactional
+    @Rollback(value = false)
+    @Test
+    void updatedSavedPostAuthorTest() {
+        Post savedPost = postRepository.findById(41).orElse(null);
+        assertThat(savedPost).isNotNull();
+        assertThat(savedPost.getAuthor()).isNull();
+
+        Author author = new Author();
+        author.setFirstName("John");
+        author.setLastName("Wick");
+        author.setEmail("john@gmail.com");
+        author.setPhoneNumber("090123456667");
+
+        //map relationships
+        savedPost.setAuthor(author);
+        postRepository.save(savedPost);
+
+        Post updatedPost = postRepository.findById(41).orElse(null);
+        assertThat(updatedPost).isNotNull();
+        assertThat(updatedPost.getAuthor()).isNotNull();
+        assertThat(updatedPost.getAuthor().getFirstName()).isEqualTo("John");
+
+        log.info("Updated post --> {}", updatedPost);
+    }
+
+    @Transactional
+    @Rollback(value = false)
+    @Test
+    void updatedSavedPostCommentTest() {
+        Post savedPost = postRepository.findById(41).orElse(null);
+        assertThat(savedPost).isNotNull();
+        assertThat(savedPost.getComments()).isNotNull();
+
+        Comment comment1 = new Comment("");
+        comment1.setContent("Hello everyone");
+        comment1.setCommentator("James Bond");
+
+
+        Comment comment2 = new Comment("");
+        comment2.setContent("Good post");
+        comment2.setCommentator("Lara Smith");
+
+        savedPost.addComment(comment2, comment1);
+
+        //map relationships
+        postRepository.save(savedPost);
+
+        Post updatedPost = postRepository.findById(41).orElse(null);
+        assertThat(updatedPost).isNotNull();
+        assertThat(updatedPost.getComments()).isNotNull();
+        assertThat(updatedPost.getComments().size()).isEqualTo(2);
+
+        log.info("Updated post --> {}", updatedPost);
     }
 }

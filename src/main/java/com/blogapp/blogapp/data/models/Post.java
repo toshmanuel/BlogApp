@@ -1,6 +1,7 @@
 package com.blogapp.blogapp.data.models;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -8,6 +9,8 @@ import org.hibernate.engine.spi.CascadeStyle;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -37,6 +40,13 @@ public class Post {
     @UpdateTimestamp
     private LocalDate dateModified;
 
-    @OneToMany(/*fetchType = FetchType.EAGER*/)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Comment> comments;
+
+    public void addComment(Comment... comment){
+        if(comments == null){
+            comments = new ArrayList<>();
+        }
+        this.comments.addAll(Arrays.asList(comment));
+    }
 }
