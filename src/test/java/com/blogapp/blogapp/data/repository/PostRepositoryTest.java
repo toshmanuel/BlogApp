@@ -13,7 +13,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.jdbc.Sql;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -171,7 +170,7 @@ class PostRepositoryTest {
         savedPost.setAuthor(author);
         postRepository.save(savedPost);
 
-        Post updatedPost = postRepository.findByBlogTitle("Title post 1");
+        Post updatedPost = postRepository.findByTitle("Title post 1");
         assertThat(updatedPost).isNotNull();
         assertThat(updatedPost.getAuthor()).isNotNull();
         assertThat(updatedPost.getAuthor().getFirstName()).isEqualTo("John");

@@ -1,7 +1,7 @@
 package com.blogapp.blogapp.service.post;
 
 import com.blogapp.blogapp.data.models.Post;
-import com.blogapp.blogapp.data.repository.PostRepository;
+import com.blogapp.blogapp.data.repository.*;
 import com.blogapp.blogapp.web.dto.PostDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

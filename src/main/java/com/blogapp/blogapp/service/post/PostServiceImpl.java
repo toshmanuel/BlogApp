@@ -3,22 +3,21 @@ package com.blogapp.blogapp.service.post;
 
 import com.blogapp.blogapp.data.models.Comment;
 import com.blogapp.blogapp.data.models.Post;
-import com.blogapp.blogapp.data.repository.PostRepository;
 import com.blogapp.blogapp.web.dto.PostDTO;
+import com.blogapp.blogapp.data.repository.PostRepository;
 import lombok.extern.slf4j.Slf4j;
-import lombok.extern.slf4j.XSlf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Slf4j
 @Service
 public class PostServiceImpl implements PostService {
 
-
     @Autowired
-    PostRepository postRepository;
+    private PostRepository postRepository;
     @Override
     public Post savePost(PostDTO postDto) {
         Post post = new Post();
