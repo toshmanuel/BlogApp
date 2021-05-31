@@ -171,7 +171,7 @@ class PostRepositoryTest {
         savedPost.setAuthor(author);
         postRepository.save(savedPost);
 
-        Post updatedPost = postRepository.findById(41).orElse(null);
+        Post updatedPost = postRepository.findByBlogTitle("Title post 1");
         assertThat(updatedPost).isNotNull();
         assertThat(updatedPost.getAuthor()).isNotNull();
         assertThat(updatedPost.getAuthor().getFirstName()).isEqualTo("John");

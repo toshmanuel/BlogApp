@@ -12,13 +12,14 @@ import static org.mockito.Mockito.*;
 
 class PostServiceImplTest {
 
+
     @Mock
     PostRepository postRepository;
 
     Post testPost;
 
     @InjectMocks
-    PostService postServiceImpl;
+    PostServiceImpl postServiceImpl;
     @BeforeEach
     void setUp() {
 
@@ -31,6 +32,6 @@ class PostServiceImplTest {
         when(postServiceImpl.savePost(new PostDTO())).thenReturn(testPost);
         postServiceImpl.savePost(new PostDTO());
 
-        verify(postRepository.save(testPost), times(1));
+        verify(postRepository, times(1)).save(testPost);
     }
 }
