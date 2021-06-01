@@ -20,11 +20,10 @@ public class BlogAppApplication {
 
 	@Bean
 	public Cloudinary getCloudinary(){
-		Cloudinary cloud = new Cloudinary(ObjectUtils.asMap(
+		return new Cloudinary(ObjectUtils.asMap(
 				"cloud_name", cloudinary.getCloudName(),
 				"api_key", cloudinary.getApiKey(),
 				"api_secret", cloudinary.getApiSecret()
 		));
-		return cloud;
 	}
 }
