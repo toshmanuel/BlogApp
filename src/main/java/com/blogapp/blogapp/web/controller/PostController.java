@@ -1,5 +1,6 @@
 package com.blogapp.blogapp.web.controller;
 
+import com.blogapp.blogapp.data.models.Post;
 import com.blogapp.blogapp.service.post.PostService;
 import com.blogapp.blogapp.web.dto.PostDTO;
 import com.blogapp.blogapp.web.exceptions.NullPostException;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Controller
@@ -21,7 +23,9 @@ public class PostController {
     private PostService postService;
 
     @GetMapping("")
-    public String getIndex() {
+    public String getIndex(Model model) {
+        List<Post> postList = postService.findAllPost();
+        model.addAttribute("postList", postList);
         return "index";
     }
 
