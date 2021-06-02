@@ -32,12 +32,12 @@ public class PostController {
 
     @GetMapping(value= "/create")
     public String create(Model model){
-        model.addAttribute("post", new PostDTO());
+//        model.addAttribute("post", new PostDTO());
         model.addAttribute("error", false);
         return "create";
     }
     @PostMapping("/save")
-    public String savedPost(@ModelAttribute @Valid PostDTO postDto, Model model){
+    public String savedPost(@ModelAttribute("post") @Valid PostDTO postDto, Model model){
         try{
             postService.savePost(postDto);
         } catch (NullPostException e) {
@@ -49,5 +49,13 @@ public class PostController {
             return "create";
         }
         return "redirect:/posts";
+    }
+/*
+*Add the model attribute globally without
+*having to specify the model to each methods
+* */
+    @ModelAttribute
+    public void createPostModel(Model model){
+        model.addAttribute("post", new PostDTO());
     }
 }
