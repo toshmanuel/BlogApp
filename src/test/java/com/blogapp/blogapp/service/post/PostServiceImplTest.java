@@ -57,4 +57,9 @@ class PostServiceImplTest {
         verify(postRepository, times(1)).findAll();
 
     }
+
+    @Test
+    void deleteAll() {
+        postServiceImpl.deleteAllPost();
+    }
 }

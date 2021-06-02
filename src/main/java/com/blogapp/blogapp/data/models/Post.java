@@ -25,7 +25,7 @@ public class Post {
     @Column(nullable = false, length = 50, unique = true)
     private String title;
 
-    @Column(length = 1000)
+    @Column(length = 5000)
     private String content;
 
     private String coverImageUrl;

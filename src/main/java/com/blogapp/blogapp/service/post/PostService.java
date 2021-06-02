@@ -15,6 +15,7 @@ public interface PostService {
     Post updatePost(PostDTO postDto);
     Post findById(Integer id);
     void deletedPostById(Integer id);
+    void deleteAllPost();
 
     Post addCommentToPost(Integer id, Comment comment);
 }

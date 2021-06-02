@@ -11,6 +11,7 @@ import com.cloudinary.utils.ObjectUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -56,12 +57,22 @@ public class PostServiceImpl implements PostService {
 //        mapper.map(postDto, post);
 //
 //        log.info("Post object after mapping --> {}", post);
-        return postRepository.save(post);
+        try{
+            return postRepository.save(post);
+        }
+        catch(DataIntegrityViolationException ex){
+            log.info("Exception occurred --> {}", ex.getMessage());
+            throw ex;
+        }
     }
 
     @Override
     public List<Post> findAllPost() {
         return postRepository.findAll();
+    }
+    @Override
+    public void deleteAllPost() {
+        postRepository.deleteAll();
     }
 
     @Override

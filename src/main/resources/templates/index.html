@@ -31,16 +31,19 @@
 
     <!-- Post -->
 
-    <div class="blog-post-container">
-        <div class="blog-post">
-            <a href="#" class="post-title">We Help You Create Perfect Modern Design</a>
+    <div id="blogs" class="blog-post-container">
+        <div class="blog-post" th:each="post : ${postList}">
+            <a href="./asset/pages/post.html" class="img-container">
+                <img th:src="${post.coverImageUrl}" alt="blog-img">
+            </a>
+            <a href="./asset/pages/post.html" class="post-title" th:text="${post.title}"></a>
             <div class="blog-post-detail">
                 <a class="user-detail">
-                    <img src="../static/asset/images/author-image1.jpg" class="user-profile">
+                    <img th:src="${post.coverImageUrl}" class="user-profile">
                     <a href="" class="user-name">Jen Lopez</a>
                 </a>
 
-                <p class="date-published"> July 22, 2017</p>
+                <p class="date-published" th:text="${post.dateCreated}"></p>
 
                 <a href="" class="actions">
                     <p><i class="far fa-comment"></i></p>
