@@ -32,8 +32,8 @@ class CloudinaryImplTest {
 
         assertThat(file.exists()).isTrue();
 //        params.put("public_id", "blogapp");
-//        params.put("folder", "blogapp");
-        params.put("public_id", "blogapp/post_file1");
+        params.put("folder", "blogapp");
+//        params.put("public_id", "blogapp/post_file1");
         params.put("overwrite", "true");
 
         try {

@@ -1,6 +1,7 @@
 package com.blogapp.blogapp.service.cloud;
 
 import com.cloudinary.Cloudinary;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -13,6 +14,7 @@ public class CloudinaryImpl implements CloudStorageService{
 
     Cloudinary cloudinary;
 
+    @Autowired
     public CloudinaryImpl(Cloudinary cloudinary) {
         this.cloudinary = cloudinary;
     }

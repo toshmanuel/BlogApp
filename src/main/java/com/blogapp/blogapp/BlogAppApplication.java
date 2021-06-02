@@ -11,19 +11,19 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class BlogAppApplication {
 
-	@Autowired
-	CloudinaryConfig cloudinary;
+//	@Autowired
+//	CloudinaryConfig cloudinary;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BlogAppApplication.class, args);
 	}
 
-	@Bean
-	public Cloudinary getCloudinary(){
-		return new Cloudinary(ObjectUtils.asMap(
-				"cloud_name", cloudinary.getCloudName(),
-				"api_key", cloudinary.getApiKey(),
-				"api_secret", cloudinary.getApiSecret()
-		));
-	}
+//	@Bean
+//	public Cloudinary getCloudinary(){
+//		return new Cloudinary(ObjectUtils.asMap(
+//				"cloud_name", cloudinary.getCloudName(),
+//				"api_key", cloudinary.getApiKey(),
+//				"api_secret", cloudinary.getApiSecret()
+//		));
+//	}
 }
