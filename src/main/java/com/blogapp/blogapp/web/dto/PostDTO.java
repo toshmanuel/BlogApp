@@ -4,6 +4,7 @@ package com.blogapp.blogapp.web.dto;
 
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class PostDTO {
@@ -14,5 +15,5 @@ public class PostDTO {
 //    @NotNull(message = "Content Cannot Be Null")
     private String content;
 
-    private String imageFile;
+    private MultipartFile imageFile;
 }

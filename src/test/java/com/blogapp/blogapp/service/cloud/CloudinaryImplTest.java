@@ -43,5 +43,23 @@ class CloudinaryImplTest {
             e.printStackTrace();
         }
 
+    }@Test
+    void uploadMultiPart(){
+        File file = new File("/home/toshmanuel/IdeaProjects/blogapp/src/main/resources/static/asset/images/amazon.png");
+        Map<Object, Object> params = new HashMap<>();
+
+        assertThat(file.exists()).isTrue();
+//        params.put("public_id", "blogapp");
+//        params.put("folder", "blogapp");
+        params.put("public_id", "blogapp/post_file1");
+        params.put("overwrite", "true");
+
+        try {
+            log.info("cloudinary response --> {}", cloudStorageService.uploadImage(file, params));
+        } catch (IOException e) {
+            log.info("--> {}", params);
+            e.printStackTrace();
+        }
+
     }
 }

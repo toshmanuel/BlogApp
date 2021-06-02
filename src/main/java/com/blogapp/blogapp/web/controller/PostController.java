@@ -2,6 +2,8 @@ package com.blogapp.blogapp.web.controller;
 
 import com.blogapp.blogapp.service.post.PostService;
 import com.blogapp.blogapp.web.dto.PostDTO;
+import com.blogapp.blogapp.web.exceptions.NullPostException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value = "/posts")
+@Slf4j
 public class PostController {
 
     @Autowired
@@ -29,6 +32,11 @@ public class PostController {
     }
     @PostMapping("/save")
     public String savedPost(@ModelAttribute @Valid PostDTO postDto){
-        return null;
+        try{
+            postService.savePost(postDto);
+        } catch (NullPostException e) {
+            log.error("Exception occurred --> {}", e.getMessage());
+        }
+        return "redirect:/posts";
     }
 }

@@ -3,6 +3,7 @@ package com.blogapp.blogapp.service.post;
 import com.blogapp.blogapp.data.models.Post;
 import com.blogapp.blogapp.data.repository.*;
 import com.blogapp.blogapp.web.dto.PostDTO;
+import com.blogapp.blogapp.web.exceptions.NullPostException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -29,8 +30,16 @@ class PostServiceImplTest {
 
     @Test
     void whenThe(){
-        when(postServiceImpl.savePost(new PostDTO())).thenReturn(testPost);
-        postServiceImpl.savePost(new PostDTO());
+        try {
+            when(postServiceImpl.savePost(new PostDTO())).thenReturn(testPost);
+        } catch (NullPostException e) {
+            e.printStackTrace();
+        }
+        try {
+            postServiceImpl.savePost(new PostDTO());
+        } catch (NullPostException e) {
+            e.printStackTrace();
+        }
 
         verify(postRepository, times(1)).save(testPost);
     }
