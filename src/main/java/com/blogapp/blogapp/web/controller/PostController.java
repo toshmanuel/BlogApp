@@ -17,7 +17,7 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String getIndex() {
         return "index";
     }
