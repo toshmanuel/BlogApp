@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Create</title>
 
     <link rel="stylesheet" th:href="@{/asset/css/styles/nav.css}">
     <link rel="stylesheet" th:href="@{/asset/css/styles/footer.css}">
@@ -16,30 +16,13 @@
     <link rel="stylesheet" th:href="@{/asset/css/styles/blog-post.css}">
     <link rel="stylesheet" th:href="@{/asset/css/media-query/create.css}">
     <script src="https://kit.fontawesome.com/e2052a1ca7.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 
 <body>
 
         <!-- Navigation   -->
         <nav th:insert="/fragments.html :: topnav"></nav>
-<!--     <nav>-->
-<!--        <div class="logo">-->
-<!--            <a href="/index.html">-->
-<!--                <h1>PentaBlog</h1>-->
-<!--            </a>-->
-<!--            <div class="toggle">-->
-<!--                <button>-->
-<!--                    <i class="fas fa-bars"></i>-->
-<!--                </button>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <ul class="links">-->
-<!--            <li><a href="/posts/">Home</a></li>-->
-<!--            <li><a href="">Create</a></li>-->
-<!--            <li><a href="pages/register.html">register</a></li>-->
-<!--        </ul>-->
-<!--    </nav>-->
     <!-- Navigation end   -->
 
 
@@ -47,7 +30,7 @@
      <form action="/posts/save" method="post" th:Object="${post}" enctype="multipart/form-data">
         <h2>Create a blog post</h2>
 
-         <div class="mb-3">
+         <div class="col-12">
              <label for="formFile" class="form-label">Cover Image</label>
              <input class="form-control"  th:field="*{imageFile}" type="file" id="formFile">
          </div>
