@@ -27,9 +27,13 @@
 
 
      <!--Form-->
-     <form action="/posts/save" method="post" th:Object="${post}" enctype="multipart/form-data">
-        <h2>Create a blog post</h2>
 
+
+     <form th:action="@{/posts/save}" method="post" th:Object="${post}" enctype="multipart/form-data">
+        <h2>Create a blog post</h2>
+         <div class="alert alert-warning" th:if="${error}" role="alert" >
+            <span th:text="${errorMessage}"></span>
+         </div>
          <div class="col-12">
              <label for="formFile" class="form-label">Cover Image</label>
              <input class="form-control"  th:field="*{imageFile}" type="file" id="formFile">
@@ -51,7 +55,7 @@
     
 
     <!-- Scripts -->
-    <script src="../static/asset/scripts/app.js"></script>
+        <script src="../static/asset/scripts/app.js"></script>
 </body>
 
 </html>
