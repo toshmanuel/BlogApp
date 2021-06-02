@@ -15,9 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -34,7 +32,7 @@ public class PostServiceImpl implements PostService {
 
         Post post = new Post();
 
-        if(postDto.getImageFile() != null){
+        if(postDto.getImageFile() != null && !postDto.getImageFile().isEmpty()){
 //            Map<?, ?> params = new HashMap<>();
 
 //            params.put("public_id", "blogapp/"+postDto.getImageFile().getName());
@@ -43,7 +41,7 @@ public class PostServiceImpl implements PostService {
             try {
                 Map<?, ?> uploadResult =configurationService.uploadImage(postDto.getImageFile(),
                         ObjectUtils.asMap("public_id",
-                        "blogapp/"+postDto.getImageFile().getOriginalFilename(), "overwrite", true));
+                        "blogapp/"+ Arrays.stream(Objects.requireNonNull(postDto.getImageFile().getOriginalFilename()).split("\\.")).findFirst(), "overwrite", true));
                 post.setCoverImageUrl((String) uploadResult.get("url"));
                 log.info("params --> {}", uploadResult);
             } catch (IOException e) {
@@ -63,7 +61,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> findAllPost() {
-        return null;
+        return postRepository.findAll();
     }
 
     @Override

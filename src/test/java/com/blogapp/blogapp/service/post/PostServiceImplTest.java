@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.Mockito.*;
 
 class PostServiceImplTest {
@@ -42,5 +45,16 @@ class PostServiceImplTest {
         }
 
         verify(postRepository, times(1)).save(testPost);
+    }
+
+    @Test
+    void whenTheFindAllMethodIsCalled_thenReturnAListOfPosts(){
+
+        List<Post> postList = new ArrayList<>();
+        when(postServiceImpl.findAllPost()).thenReturn(postList);
+        postServiceImpl.findAllPost();
+
+        verify(postRepository, times(1)).findAll();
+
     }
 }
