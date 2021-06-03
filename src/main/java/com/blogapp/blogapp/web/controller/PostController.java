@@ -64,4 +64,10 @@ public class PostController {
     public void createPostModel(Model model){
         model.addAttribute("post", new PostDTO());
     }
+
+    @GetMapping("/info/{postId}")
+    public String getPostDetails(@PathVariable("postId") Integer postId, Model model){
+        log.info("Request for a post path --> {}", postId);
+        return "post";
+    }
 }

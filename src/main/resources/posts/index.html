@@ -42,7 +42,7 @@
     <div id="blog" class="blog-post-container">
         <div class="blog-post" th:each="post : ${postList}">
             <a href="./asset/pages/post.html" class="img-container">
-                <img th:src="${post.imageFile}" alt="blog-img"  >
+                <img th:src="${post.coverImageUrl}" alt="blog-img" >
             </a>
             <a href="./asset/pages/post.html" class="post-title" th:text="${post.title}"></a>
             <div class="blog-post-detail">
@@ -51,7 +51,7 @@
                     <a href="" class="user-name">Jen Lopez</a>
                 </a>
 
-                <p class="date-published" th:text="${post.dateCreated}"></p>
+                <p class="date-published" th:text="${post.datePublished}"></p>
 
                 <a href="" class="actions">
                     <p><i class="far fa-comment"></i></p>
@@ -61,7 +61,7 @@
             <div class="post-content">
                 <p th:text="${post.content}"></p>
             </div>
-            <a th:href="@{/posts/info/{postId}(postId = ${post.getId()})}">
+            <a href="/asset/pages/post.html">
                 <button class="view-post">
                     continue reading
                 </button>
