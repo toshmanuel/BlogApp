@@ -16,7 +16,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 //import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 //import static org.hamcrest.Matchers.hasSize;
@@ -211,9 +211,9 @@ class PostRepositoryTest {
     @Test
     void findAllPostInDescendingOrderTest(){
         List<Post> allPost = postRepository.findByOrderByDateCreatedDesc();
-        allPost.get(0).getDateCreated()
+        assertTrue(allPost.get(0).getDateCreated()
                 .isAfter(allPost.get(1)
-                        .getDateCreated());
+                        .getDateCreated()));
 
         allPost.forEach(post -> log.info("Post Index {}", post.getDateCreated()));
     }
