@@ -207,4 +207,14 @@ class PostRepositoryTest {
 
         log.info("Updated post --> {}", updatedPost);
     }
+
+    @Test
+    void findAllPostInDescendingOrderTest(){
+        List<Post> allPost = postRepository.findByOrderByDateCreatedDesc();
+        allPost.get(0).getDateCreated()
+                .isAfter(allPost.get(1)
+                        .getDateCreated());
+
+        allPost.forEach(post -> log.info("Post Index {}", post.getDateCreated()));
+    }
 }
