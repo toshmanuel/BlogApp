@@ -3,20 +3,21 @@ package com.blogapp.blogapp.service.post;
 
 import com.blogapp.blogapp.data.models.Comment;
 import com.blogapp.blogapp.data.models.Post;
+import com.blogapp.blogapp.data.repository.PostRepository;
 import com.blogapp.blogapp.service.cloud.CloudStorageService;
 import com.blogapp.blogapp.web.dto.PostDTO;
-import com.blogapp.blogapp.data.repository.PostRepository;
 import com.blogapp.blogapp.web.exceptions.NullPostException;
 import com.cloudinary.utils.ObjectUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -73,6 +74,11 @@ public class PostServiceImpl implements PostService {
     @Override
     public void deleteAllPost() {
         postRepository.deleteAll();
+    }
+
+    @Override
+    public List<Post> findPostInDescOrder() {
+        return postRepository.findByOrderByDateCreatedDesc();
     }
 
     @Override

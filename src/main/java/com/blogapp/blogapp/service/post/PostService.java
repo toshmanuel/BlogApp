@@ -17,5 +17,7 @@ public interface PostService {
     void deletedPostById(Integer id);
     void deleteAllPost();
 
+    List<Post> findPostInDescOrder();
+
     Post addCommentToPost(Integer id, Comment comment);
 }
