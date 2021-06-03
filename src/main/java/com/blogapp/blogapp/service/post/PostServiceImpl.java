@@ -37,16 +37,16 @@ public class PostServiceImpl implements PostService {
 
         Post post = new Post();
 
-        if(postDto.getImageFile() != null && !postDto.getImageFile().isEmpty()){
+        if(postDto.getCoverImageUrl() != null && !postDto.getCoverImageUrl().isEmpty()){
 //            Map<?, ?> params = new HashMap<>();
 
 //            params.put("public_id", "blogapp/"+postDto.getImageFile().getName());
 //            params.put("overwrite", true);
 //            log.info("params --> {}", params);
             try {
-                Map<?, ?> uploadResult =configurationService.uploadImage(postDto.getImageFile(),
+                Map<?, ?> uploadResult =configurationService.uploadImage(postDto.getCoverImageUrl(),
                         ObjectUtils.asMap("public_id",
-                        "blogapp/"+ extractFileName(Objects.requireNonNull(postDto.getImageFile().getOriginalFilename()))
+                        "blogapp/"+ extractFileName(Objects.requireNonNull(postDto.getCoverImageUrl().getOriginalFilename()))
                         ));
                 post.setCoverImageUrl((String) uploadResult.get("url"));
                 log.info("params --> {}", uploadResult);

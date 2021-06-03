@@ -84,17 +84,17 @@ class CloudinaryImplTest {
                 Files.readAllBytes(path));
         log.info("Multipart Object created --> {}", multipartFile);
         assertThat(multipartFile).isNotNull();
-        postDTO.setImageFile(multipartFile);
+        postDTO.setCoverImageUrl(multipartFile);
 
 
-        log.info("File name --> {}", postDTO.getImageFile().getOriginalFilename());
+        log.info("File name --> {}", postDTO.getCoverImageUrl().getOriginalFilename());
         cloudStorageService.uploadImage(multipartFile, ObjectUtils.asMap(
                 "public_id", "blogapp/"+extractFileName(Objects.requireNonNull(postDTO
-                        .getImageFile()
+                        .getCoverImageUrl()
                         .getOriginalFilename()))
         ));
 
-        assertThat(postDTO.getImageFile().getOriginalFilename()).isEqualTo("amazon.png");
+        assertThat(postDTO.getCoverImageUrl().getOriginalFilename()).isEqualTo("amazon.png");
     }
 
     private String extractFileName(String fileName){

@@ -20,5 +20,5 @@ public class PostDTO {
     @NotBlank
     private String content;
 
-    private MultipartFile imageFile;
+    private MultipartFile coverImageUrl;
 }

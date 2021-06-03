@@ -33,7 +33,7 @@
          </div>
 
          <label for="avatar">Choose your cover image</label>
-        <input th:field = "*{imageFile}" type="file" id="avatar" name="avatar" />
+        <input th:field = "*{coverImageUrl}" type="file" id="avatar" name="avatar" />
 
          <input type="text" th:field ="*{title}" name="text" id="text" placeholder="Enter blog post title" />
          <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
