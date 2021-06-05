@@ -4,6 +4,7 @@ import com.blogapp.blogapp.data.models.Post;
 import com.blogapp.blogapp.service.post.PostService;
 import com.blogapp.blogapp.web.dto.PostDTO;
 import com.blogapp.blogapp.web.exceptions.NullPostException;
+import com.blogapp.blogapp.web.exceptions.PostNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -68,6 +69,13 @@ public class PostController {
     @GetMapping("/info/{postId}")
     public String getPostDetails(@PathVariable("postId") Integer postId, Model model){
         log.info("Request for a post path --> {}", postId);
+
+        try{
+            Post savedPost = postService.findById(postId);
+            model.addAttribute("postInfo", savedPost);
+        } catch (PostNotFoundException e) {
+            log.info("Exception occurred");
+        }
         return "post";
     }
 }

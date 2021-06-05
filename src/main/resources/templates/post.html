@@ -5,26 +5,26 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <link rel="stylesheet" th:href="@{asset/css/styles/nav.css}">
-    <link rel="stylesheet" th:href="@{asset/css/styles/footer.css}">
-    <link rel="stylesheet" th:href="@{asset/css/media-query/footer.css}">
-    <link rel="stylesheet" th:href="@{asset/css/media-query/nav.css}">
-    <link rel="stylesheet" th:href="@{asset/css/media-query/style.css}">
-    <link rel="stylesheet" th:href="@{asset/css/styles/post.css}">
-    <link rel="stylesheet" th:href="@{asset/css/styles/blog-post.css}">
-    <link rel="stylesheet" th:href="@{asset/css/media-query/post.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/styles/nav.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/styles/footer.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/media-query/footer.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/media-query/nav.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/media-query/style.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/styles/post.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/styles/blog-post.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/media-query/post.css}">
     <script src="https://kit.fontawesome.com/e2052a1ca7.js" crossorigin="anonymous"></script>
 
 </head>
 
-<body>
+<body th:object="${postInfo}">
 <!-- Navigation   -->
 <nav th:insert="/fragments.html :: topnav"></nav>
 <!-- Navigation end   -->
 
 <!-- Post Container -->
 <div class="post-header">
-    <h1>We Help You Create Perfect Modern Design</h1>
+    <img th:src="*{coverImageUrl}" alt="" class="post-header">
 </div>
 <!-- Post Container end -->
 
@@ -32,21 +32,23 @@
 
 <div class="blog-post-container">
     <div class="blog-post">
-        <a href="#" class="post-title">We Help You Create Perfect Modern Design</a>
+        <a href="#" class="post-title" th:text="*{title}"></a>
         <div class="blog-post-detail">
             <a class="user-detail">
                 <img src="../images/author-image1.jpg" class="user-profile">
                 <a href="" class="user-name">Jen Lopez</a>
             </a>
 
-            <p class="date-published"> July 22, 2017</p>
+            <p class="date-published" th:text="*{dateCreated}"></p>
 
             <a href="" class="actions">
                 <p><i class="far fa-comment"></i></p>
                 <p><span class="comment-count">35</span> Comments</p>
             </a>
         </div>
-        <div class="post-content"></div>
+        <div class="post-content">
+            <p th:text="*{content}"></p>
+        </div>
 
         <!-- Comment -->
         <div class="comment-container">
